@@ -9,36 +9,6 @@
 import UIKit
 
 
-
-func animateTime(){
-    AniRun(
-          ANI(1.0){
-                print("1\n")
-            }
-      /> ANI(2.0){
-                print("2\n")
-            }
-      /> ANI(3.0){
-                print("3\n")
-            }
-    )
-}
-
-
-
-
-func longFormAnimation(){
-    UIView.animateWithDuration(1.0, animations: { print("1") }, completion: { _ in
-        
-        UIView.animateWithDuration(1.0, animations: { print("2") }, completion: { _ in
-            
-            UIView.animateWithDuration(1.0, animations: { print("3") }, completion: nil)
-            })
-        })
-}
-
-
-
 class ViewController: UIViewController {
 
     @IBOutlet weak var button1: UIButton!
@@ -54,7 +24,6 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        animateTime()
         
         AniRun(
             ANI(3.0){
@@ -81,7 +50,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 
