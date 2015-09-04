@@ -3,7 +3,7 @@ Chain Animations in Swift with operators
 
 First use `ANI` to build a `TimedPair` with a duration and  function
 ```
-let a = ANI(1.5) { print("1\n")
+let a = ANI(1.5) { print("1\n") }
 ```
 
 Chain  `TimedPair` animations together with the `/>` operator
