@@ -9,56 +9,25 @@
 import UIKit
 
 
-prefix operator /+/ {
-//associativity left
-//precedence 140
-}
-
-infix operator /-/ {
-associativity left
-precedence 140
-}
-
-
-typealias EmptyFunc =  Void -> Void
-
-typealias FuncVoid  = (EmptyFunc) -> (Void)
-
-typealias CompFunc  =  FuncVoid -> FuncVoid
-
-
-prefix func /+/ ( rhs:EmptyFunc) {
-    rhs()
-}
-
-func /-/ (@autoclosure(escaping) lhs:EmptyFunc, @autoclosure(escaping) rhs:EmptyFunc) ->  (Double) -> EmptyFunc{
-    
-    
-//    let lhss = lhs
-    return { x in {
-            UIView.animateWithDuration(x, animations: {
-                lhs()
-            }){ _ in
-                rhs()
-            }
-        }
-    }
-}
-//
-//func animateCompletion()
-
-
-
 
 func animateTime(){
-    let x =  (print("1\n")  /-/  print("2\n")) (5.5)// /-/  print("3\n") (5.5)
-        x()
+    AniRun(
+          ANI(1.5){
+                print("1\n")
+            }
+      /> ANI(2.5){
+                print("2\n")
+            }
+      /> ANI(3.5){
+                print("3\n")
+            }
+    )
 }
 
 
 
 
-func longformanimation(){
+func longFormAnimation(){
     UIView.animateWithDuration(1.0, animations: { print("1") }, completion: { _ in
         
         UIView.animateWithDuration(1.0, animations: { print("2") }, completion: { _ in
