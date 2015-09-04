@@ -18,7 +18,26 @@ Run the animation with  `AniRun`
 AniRun(x)
 ```
 
-
-
-
-
+Or throw it all together
+```
+        AniRun(
+            ANI(3.0){
+                self.button1.frame.origin.x += 100
+            }
+            /> ANI(0){
+                self.button2.frame.origin.x += 100
+            }
+            /> ANI(5.5){
+                self.button3.frame.origin.x += 100
+            }
+            /> ANI(3.0){
+                self.button1.frame.origin.x -= 100
+            }
+            /> ANI(5.5){
+                self.button2.frame.origin.x -= 100
+            }
+            /> ANI(5.5){
+                self.button3.frame.origin.x -= 100
+            }
+        )
+```
