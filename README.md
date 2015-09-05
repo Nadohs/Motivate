@@ -8,23 +8,19 @@ let a = ANI(1.5) { print("1\n") }
 
 Chain  `TimedPair` animations together with the `/>` operator
 ```
-let x =  ANI(1.5) { print("1\n") }
+         ANI(1.5) { print("1\n") }
       /> ANI(2.5) { print("2\n") }
       /> ANI(3.5) { print("3\n") }
 ```
 
-Run the animation with  `AniRun`
+More 
 ```
-AniRun(x)
-```
-
-Or throw it all together
-```
-        AniRun(
             ANI(3.0){
                 self.button1.frame.origin.x += 100
+                self.button2.frame.origin.x -= 100
             }
             /> ANI(0){
+                self.button1.frame.origin.x -= 100
                 self.button2.frame.origin.x += 100
             }
             /> ANI(5.5){
