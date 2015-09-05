@@ -19,6 +19,7 @@ typealias TimedPair = (Double, EmptyFunc)
 
 
 
+
 /// Create `TimedPair` from duration `t` and function `e`
 
 func ANI (t:Double, e: EmptyFunc) -> TimedPairWrapper{
