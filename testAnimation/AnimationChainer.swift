@@ -21,8 +21,8 @@ typealias TimedPair = (Double, EmptyFunc)
 
 /// Create `TimedPair` from duration `t` and function `e`
 
-func ANI (t:Double, e: EmptyFunc) -> TimedPair{
-    return (t, e)
+func ANI (t:Double, e: EmptyFunc) -> TimedPairWrapper{
+    return TimedPairWrapper(tp: (t, e))
 }
 
 
@@ -32,30 +32,56 @@ func AniRun (x:TimedPair){
     x.1()
 }
 
+class TimedPairWrapper {
+    
+    var unwrapFinished = false
+    
+    var _unwrap:TimedPair
+    var unwrap:TimedPair{
+        get{
+            unwrapFinished = true
+            return _unwrap
+        }
+        set{
+            _unwrap = newValue
+        }
+    }
+    
+    init(tp:TimedPair){
+        _unwrap = tp
+    }
+    
+    deinit{
+        if !unwrapFinished{
+            unwrap.1()
+        }
+    }
+}
 
 /// Chain together `TimedPair`s and return one `TimedPair`
 
-func /> ( lhs:TimedPair, rhs:TimedPair) ->  TimedPair{
+func /> ( lhs:TimedPairWrapper, rhs:TimedPairWrapper) ->  TimedPairWrapper{
     
     return
-        ( -1.0, {
-                UIView.animateWithDuration(lhs.0, animations: {
-                    //print("time\(lhs.0)\n")
-                        lhs.1()
+        TimedPairWrapper(tp :( -1.0, {
+                UIView.animateWithDuration(lhs.unwrap.0, animations: {
+                    print("time\(lhs.unwrap.0)\n")
+                        lhs.unwrap.1()
+
                     }){ _ in
                         
-                        if rhs.0 == -1.0{
-                            rhs.1()
+                        if rhs.unwrap.0 == -1.0{
+                            rhs.unwrap.1()
                             return
                         }
                         
-                        UIView.animateWithDuration(rhs.0) {
-                          //  print("time B \(rhs.0)\n")
-                            rhs.1()
+                        UIView.animateWithDuration(rhs.unwrap.0) {
+                            print("time B \(rhs.unwrap.0)\n")
+                            rhs.unwrap.1()
                         }
                     }
              }
-        )
+        ))
 }
 
 /* EXAMPLE:

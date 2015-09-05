@@ -159,6 +159,7 @@
 		BD88D8631B9936480032D0D6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Demo;
 				TargetAttributes = {
@@ -415,6 +416,7 @@
 				BD88D88C1B9936480032D0D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD88D88D1B9936480032D0D6 /* Build configuration list for PBXNativeTarget "testAnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +425,7 @@
 				BD88D88F1B9936480032D0D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

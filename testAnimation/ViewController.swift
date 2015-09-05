@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AniRun(
+//        AniRun(
             ANI(3.0){
                     self.button1.frame.origin.x += 100
                 }
@@ -43,8 +43,8 @@ class ViewController: UIViewController {
             }
             /> ANI(5.5){
                 self.button3.frame.origin.x -= 100
-        }
-        )
+            }
+//        )
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
