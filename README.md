@@ -70,5 +70,4 @@ Chain  `TimedPair` animations together with the `/>` operator, which calls the n
             /> ANI(5.5){
                 self.button3.frame.origin.x -= 100
             }
-        )
 ```
