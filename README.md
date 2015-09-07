@@ -1,9 +1,10 @@
-# SwiftChainedAnimations
+# Motivate - Animation Chaining
 Chain Animations in Swift with operators
 
 ### What it Replaces
 
-What this does is turn this long chained animations, set to fire one right after the previous completes
+What **Motivate** does is turn this long chain of animations, set to fire one animation after the other completes:
+
 ```
 func longFormChainedSyntax(){
     UIView.animateWithDuration(1.0, animations: { print("1") }, completion: { _ in
@@ -15,59 +16,79 @@ func longFormChainedSyntax(){
     })
 }
 ```
-into this much more digestible syntax:
+
+into this much more readable syntax:
+
+
 ```
 func shortFormChainedSyntax(){
-    ANI(1.0){
+    Motivate(time: 1.0){
         print("1\n")
     }
-    /> ANI(2.0){
+    <> Motivate(time: 2.0){
         print("2\n")
     }
-    /> ANI(3.0){
+    <> Motivate(time: 3.0){
         print("3\n")
     }
 }
 ```
 
-
-
-
-
-
 ### Usage
-First use `ANI` to build a `TimedPair` with a duration and  function
-```
-let a = ANI(1.5) { print("1\n") }
-```
 
-Chain  `TimedPair` animations together with the `/>` operator, which calls the next animation, on the completion of the previous.
+First use `Motivate` to build a `TimedPair` with a duration as `time`, optionally `delay` and a function to animate
 
 ```
-         ANI(1.5) { print("1\n") }
-      /> ANI(2.5) { print("2\n") }
-      /> ANI(3.5) { print("3\n") }
+let a = Motivate(time: 1.5, delay: 1.0) { print("1\n") }
 ```
-### More Example Usage
+
+Chain  `TimedPair` animations together with the `<>` operator, which calls the next animation, on the completion of the previous.
+
 ```
-            ANI(3.0){
-                self.button1.frame.origin.x += 100
-                self.button2.frame.origin.x -= 100
-            }
-            /> ANI(0){
-                self.button1.frame.origin.x -= 100
-                self.button2.frame.origin.x += 100
-            }
-            /> ANI(5.5){
-                self.button3.frame.origin.x += 100
-            }
-            /> ANI(3.0){
-                self.button1.frame.origin.x -= 100
-            }
-            /> ANI(5.5){
-                self.button2.frame.origin.x -= 100
-            }
-            /> ANI(5.5){
-                self.button3.frame.origin.x -= 100
-            }
+         Motivate(time: 1.5) { print("1\n") }
+      <> Motivate(time: 2.5) { print("2\n") }
+      <> Motivate(time: 3.5) { print("3\n") }
+```
+
+### Looping
+
+You can assign the animation as a variable, and either call `runLoop` to run it looped, or `run` to animate it once.
+
+```        
+let animation = Motivate(time: 3.0){
+                    self.button1.frame.origin.x += 100
+                    self.button2.frame.origin.x -= 100
+                    self.button1.backgroundColor = UIColor.greenColor()
+                }
+                <> Motivate(time: 1.0, delay:2.0){
+                    
+                    self.button1.frame.origin.x -= 100
+                    self.button2.frame.origin.x += 100
+                    self.button1.backgroundColor = UIColor.blueColor()
+                }
+                <> Motivate(time: 2.5){
+                    
+                    self.button3.frame.origin.x += 100
+                    self.button1.backgroundColor = UIColor.orangeColor()
+                }
+                <> Motivate(time: 1.0){
+                    
+                    self.button1.frame.origin.x -= 100
+                    self.button1.backgroundColor = UIColor.redColor()
+                }
+                <> Motivate(time: 2.5){
+                    
+                    self.button2.frame.origin.x += 100
+                    self.button1.backgroundColor = UIColor.blackColor()
+                }
+                <> Motivate(time: 1.5, delay:1.5){
+                    
+                    self.button3.frame.origin.x -= 100
+                    self.button2.frame.origin.x -= 100
+                    self.button1.frame.origin.x += 100
+                    self.button1.backgroundColor = UIColor.whiteColor()
+                }
+
+animation.runLoop() //repeats
+//animation.run() //runs once
 ```
