@@ -22,43 +22,60 @@ class ViewController: UIViewController {
 
     }
     
-    
 
     func animationChain(){
         
-       let animation = Motivate(time: 3.0){
-                        self.button1.frame.origin.x += 100
-                        self.button2.frame.origin.x -= 100
-                        self.button1.backgroundColor = UIColor.greenColor()
-                        }
-                    <> Motivate(time: 1.0, delay:2.0){
-                        
-                        self.button1.frame.origin.x -= 100
-                        self.button2.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.blueColor()
-                    }
-                    <> Motivate(time: 2.5){
-                        
-                        self.button3.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.orangeColor()
-                    }
-                    <> Motivate(time: 1.0){
-                        
-                        self.button1.frame.origin.x -= 100
-                        self.button1.backgroundColor = UIColor.redColor()
-                    }
-                    <> Motivate(time: 2.5){
-                        
-                        self.button2.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.blackColor()
-                    }
-                    <> Motivate(time: 1.5, delay:1.5){
-                        
-                        self.button3.frame.origin.x -= 100
-                        self.button2.frame.origin.x -= 100
-                        self.button1.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.whiteColor()
-                    }
+        let animation = Motivate(time: 3.0,
+                button1.byX( 100),
+                 button2.byX(-100))
+            <> Motivate(time: 1.0,
+                button1.byX(-100),
+                 button2.byX( 100))
+            <> Motivate(time: 2.5,
+                button3.byX( 100))
+            <> Motivate(time: 1.0,
+                button1.byX(-100))
+            <> Motivate(time: 2.5,
+                button2.byX(+100))
+            <> Motivate(time: 1.5,
+                button3.byX(-100),
+                 button2.byX(-100),
+                 button1.byX( 100))
+        
+        
+//       let animation = Motivate(time: 3.0){
+//                        self.button1.frame.origin.x += 100
+//                        self.button2.frame.origin.x -= 100
+//                        self.button1.backgroundColor = UIColor.greenColor()
+//                        }
+//                    <> Motivate(time: 1.0, delay:2.0){
+//                        
+//                        self.button1.frame.origin.x -= 100
+//                        self.button2.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.blueColor()
+//                    }
+//                    <> Motivate(time: 2.5){
+//                        
+//                        self.button3.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.orangeColor()
+//                    }
+//                    <> Motivate(time: 1.0){
+//                        
+//                        self.button1.frame.origin.x -= 100
+//                        self.button1.backgroundColor = UIColor.redColor()
+//                    }
+//                    <> Motivate(time: 2.5){
+//                        
+//                        self.button2.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.blackColor()
+//                    }
+//                    <> Motivate(time: 1.5, delay:1.5){
+//                        
+//                        self.button3.frame.origin.x -= 100
+//                        self.button2.frame.origin.x -= 100
+//                        self.button1.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.whiteColor()
+//                    }
         
         animation.runLoop()
     }

@@ -14,6 +14,7 @@
 		BD88D87B1B9936480032D0D6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD88D8791B9936480032D0D6 /* LaunchScreen.xib */; };
 		BD88D8871B9936480032D0D6 /* testAnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD88D8861B9936480032D0D6 /* testAnimationTests.swift */; };
 		BD88D8911B9972CE0032D0D6 /* AnimationChainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD88D8901B9972CE0032D0D6 /* AnimationChainer.swift */; };
+		BDBD45141B9D6BF000729A49 /* TimedPairExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBD45131B9D6BF000729A49 /* TimedPairExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		BD88D8851B9936480032D0D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD88D8861B9936480032D0D6 /* testAnimationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testAnimationTests.swift; sourceTree = "<group>"; };
 		BD88D8901B9972CE0032D0D6 /* AnimationChainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationChainer.swift; sourceTree = "<group>"; };
+		BDBD45131B9D6BF000729A49 /* TimedPairExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedPairExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				BD88D8701B9936480032D0D6 /* AppDelegate.swift */,
 				BD88D8721B9936480032D0D6 /* ViewController.swift */,
 				BD88D8901B9972CE0032D0D6 /* AnimationChainer.swift */,
+				BDBD45131B9D6BF000729A49 /* TimedPairExtensions.swift */,
 				BD88D8741B9936480032D0D6 /* Main.storyboard */,
 				BD88D8771B9936480032D0D6 /* Images.xcassets */,
 				BD88D8791B9936480032D0D6 /* LaunchScreen.xib */,
@@ -219,6 +222,7 @@
 				BD88D8731B9936480032D0D6 /* ViewController.swift in Sources */,
 				BD88D8911B9972CE0032D0D6 /* AnimationChainer.swift in Sources */,
 				BD88D8711B9936480032D0D6 /* AppDelegate.swift in Sources */,
+				BDBD45141B9D6BF000729A49 /* TimedPairExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
