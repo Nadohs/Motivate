@@ -96,6 +96,10 @@ class TimedPairWrapper {
         loop()
     }
     
+    func run(){
+        unwrap.block()
+    }
+    
     
     private func loop(){
         unwrap.block()
