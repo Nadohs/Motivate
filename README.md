@@ -1,4 +1,4 @@
-# Motivate - Animation Chaining
+# Motivate - Animation Chaining ![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 Chain Animations in Swift with operators
 
 ### What it Replaces
