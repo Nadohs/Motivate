@@ -21,30 +21,50 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
     }
+    
+    
 
+    func animationChain(){
+        
+       let animation = Motivate(time: 3.0){
+                        self.button1.frame.origin.x += 100
+                        self.button2.frame.origin.x -= 100
+                        self.button1.backgroundColor = UIColor.greenColor()
+                        }
+                    <> Motivate(time: 1.0, delay:2.0){
+                        
+                        self.button1.frame.origin.x -= 100
+                        self.button2.frame.origin.x += 100
+                        self.button1.backgroundColor = UIColor.blueColor()
+                    }
+                    <> Motivate(time: 2.5){
+                        
+                        self.button3.frame.origin.x += 100
+                        self.button1.backgroundColor = UIColor.orangeColor()
+                    }
+                    <> Motivate(time: 1.0){
+                        
+                        self.button1.frame.origin.x -= 100
+                        self.button1.backgroundColor = UIColor.redColor()
+                    }
+                    <> Motivate(time: 2.5){
+                        
+                        self.button2.frame.origin.x += 100
+                        self.button1.backgroundColor = UIColor.blackColor()
+                    }
+                    <> Motivate(time: 1.5, delay:1.5){
+                        
+                        self.button3.frame.origin.x -= 100
+                        self.button2.frame.origin.x -= 100
+                        self.button1.frame.origin.x += 100
+                        self.button1.backgroundColor = UIColor.whiteColor()
+                    }
+        
+        animation.runLoop()
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        AniRun(
-            ANI(3.0){
-                    self.button1.frame.origin.x += 100
-                }
-            /> ANI(0){
-                    self.button2.frame.origin.x += 100
-                }
-            /> ANI(5.5){
-                    self.button3.frame.origin.x += 100
-            }
-            /> ANI(3.0){
-                self.button1.frame.origin.x -= 100
-            }
-            /> ANI(5.5){
-                self.button2.frame.origin.x -= 100
-            }
-            /> ANI(5.5){
-                self.button3.frame.origin.x -= 100
-            }
-//        )
+        animationChain()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

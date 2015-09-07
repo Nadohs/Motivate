@@ -9,36 +9,46 @@
 import UIKit
 
 
-infix operator /> {
-    associativity right
-    precedence 140
-}
+
 
 typealias EmptyFunc =  Void -> Void
-typealias TimedPair = (Double, EmptyFunc)
+typealias TimedPair = (time:Double, delay:Double, block:EmptyFunc)
 
 
 
 
 /// Create `TimedPair` from duration `t` and function `e`
 
-func ANI (t:Double, e: EmptyFunc) -> TimedPairWrapper{
-    return TimedPairWrapper(tp: (t, e))
-}
+
+    func Motivate(time t:Double, delay d:Double = 0.0, e: EmptyFunc) -> TimedPairWrapper{
+        return TimedPairWrapper(tp: (t, d, e ))
+    }
 
 
 /// Run animation on `TimedPair`
 
-func AniRun (x:TimedPair){
-    x.1()
-}
+
 
 class TimedPairWrapper {
     
+    private func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+
+    
     var unwrapFinished = false
     
+    var shouldLoop = false
+    
+    var totalTime:Double = 0
+    
     var _unwrap:TimedPair
-    var unwrap:TimedPair{
+    var  unwrap:TimedPair{
         get{
             unwrapFinished = true
             return _unwrap
@@ -48,71 +58,100 @@ class TimedPairWrapper {
         }
     }
     
+    func calculateTime(){
+        let left = self.unwrap
+        if left.time != -1{
+            totalTime += left.time + left.delay
+        }
+    }
+    
+    func chainAnimate(next:EmptyFunc = {} ) -> EmptyFunc{
+        
+        let left = self.unwrap
+        
+
+        
+        return {
+            
+            UIView.animateWithDuration(
+                     left.time,
+                     delay: left.delay,
+                   options: UIViewAnimationOptions.TransitionNone,
+                animations:
+                
+                    { left.block() })
+                    { _ in next()  }
+        }
+    }
+    
+    
     init(tp:TimedPair){
         _unwrap = tp
     }
     
-    deinit{
-        if !unwrapFinished{
-            unwrap.1()
+    /// call `runLoop()` to repeat the animation continuously.
+    
+    func runLoop(){
+        shouldLoop = true
+        loop()
+    }
+    
+    
+    private func loop(){
+        unwrap.block()
+        
+        if !shouldLoop{
+            return
+        }
+        
+        delay(totalTime){
+            self.loop()
         }
     }
+    
+    
+    deinit{
+        if !unwrapFinished{
+            unwrap.block()
+        }
+    }
+    
+    //    chain() DOESNT WORK BECAUSE REQUIRES RIGHT ASSOCIATIVITY
+    
+    //    func chain(time t:Double, delay d:Double = 0.0, e: EmptyFunc) -> TimedPairWrapper{
+    //        return (self <> TimedPairWrapper(tp: (t, d, e )))
+    //    }
 }
+
 
 /// Chain together `TimedPair`s and return one `TimedPair`
 
-func /> ( lhs:TimedPairWrapper, rhs:TimedPairWrapper) ->  TimedPairWrapper{
+infix operator <> {
+    associativity right
+    precedence 140
+}
+
+
+func <> ( lhs:TimedPairWrapper, rhs:TimedPairWrapper) ->  TimedPairWrapper{
     
-    return
-        TimedPairWrapper(tp :( -1.0, {
-                UIView.animateWithDuration(lhs.unwrap.0, animations: {
-                    print("time\(lhs.unwrap.0)\n")
-                        lhs.unwrap.1()
-
-                    }){ _ in
-                        
-                        if rhs.unwrap.0 == -1.0{
-                            rhs.unwrap.1()
-                            return
-                        }
-                        
-                        UIView.animateWithDuration(rhs.unwrap.0) {
-                            print("time B \(rhs.unwrap.0)\n")
-                            rhs.unwrap.1()
-                        }
-                    }
-             }
-        ))
-}
-
-/* EXAMPLE:
-
-
-func animateTime(){
-    AniRun(
-        ANI(1.0){
-            print("1\n")
-            }
-            /> ANI(2.0){
-                print("2\n")
-            }
-            /> ANI(3.0){
-                print("3\n")
-        }
-    )
-}
-
-
-func longFormAnimation(){
-    UIView.animateWithDuration(1.0, animations: { print("1") }, completion: { _ in
-        
-        UIView.animateWithDuration(1.0, animations: { print("2") }, completion: { _ in
+    lhs.calculateTime()
+    rhs.calculateTime()
+    
+    let pair = TimedPairWrapper(tp :( -1.0, 0.0, {
             
-            UIView.animateWithDuration(1.0, animations: { print("3") }, completion: nil)
-        })
-    })
+            lhs.chainAnimate({
+                if rhs.unwrap.time == -1.0{
+                   rhs.unwrap.block()
+                }else{
+                   rhs.chainAnimate()()
+                }
+            })()
+    }))
+    
+    pair.totalTime = lhs.totalTime + rhs.totalTime
+    
+    return pair
 }
 
-*/
 
 
