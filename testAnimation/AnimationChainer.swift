@@ -17,7 +17,7 @@ typealias EmptyFunc =  Void -> Void
 
 typealias PurePair = (Double, Double) -> TimedPair
 
-typealias RussDollFunc = (EmptyFunc) -> EmptyFunc
+typealias NestedFunc = (EmptyFunc) -> Void
 
 
 struct TimedPair {
@@ -181,6 +181,10 @@ class TimedPairWrapper {
     
     func run(){
         unwrap.block()
+    }
+    
+    func runReverse(){
+             self.unwrap.reverse()
     }
     
     func forwardReverse(){

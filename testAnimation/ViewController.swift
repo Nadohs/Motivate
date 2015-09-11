@@ -17,6 +17,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var button3: UIButton!
     
+    var animation:TimedPairWrapper?
+    
+    @IBAction func playPressed(sender: AnyObject) {
+        animation?.run()
+    }
+    
+    
+    @IBAction func reversePressed(sender: AnyObject) {
+        animation?.runReverse()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +37,7 @@ class ViewController: UIViewController {
 
     func animationChain(){
         
-        let animation = Motivate(
+         animation = Motivate(
                 time: 3.0,
                 button1.byX(-20),
                 button2.byX(-20)
@@ -97,7 +109,7 @@ class ViewController: UIViewController {
 //                        self.button1.backgroundColor = UIColor.whiteColor()
 //                    }
         
-        animation.forwardReverse()
+        //animation!.forwardReverse()
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
