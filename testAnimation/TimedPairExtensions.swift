@@ -12,25 +12,25 @@ import UIKit
 extension UIView{
     
     func byX(x:CGFloat) -> TimedPair{
-        var f = frame
+        var f = CGRect.zero
         f.origin.x += x
         return self.byFrame(f)
     }
     
     func byY(y:CGFloat) -> TimedPair{
-        var f = frame
+        var f = CGRect.zero
         f.origin.y += y
         return self.byFrame(f)
     }
     
     func byWidth(w:CGFloat) -> TimedPair{
-        var f = frame
+        var f = CGRect.zero
         f.size.width += w
         return self.byFrame(f)
     }
     
     func byHeight(h:CGFloat) -> TimedPair{
-        var f = frame
+        var f = CGRect.zero
         f.size.height += h
         return self.byFrame(f)
     }

@@ -25,22 +25,42 @@ class ViewController: UIViewController {
 
     func animationChain(){
         
-        let animation = Motivate(time: 3.0,
-                button1.byX( 100),
-                 button2.byX(-100))
-            <> Motivate(time: 1.0,
-                button1.byX(-100),
-                 button2.byX( 100))
-            <> Motivate(time: 2.5,
-                button3.byX( 100))
-            <> Motivate(time: 1.0,
-                button1.byX(-100))
-            <> Motivate(time: 2.5,
-                button2.byX(+100))
-            <> Motivate(time: 1.5,
-                button3.byX(-100),
-                 button2.byX(-100),
-                 button1.byX( 100))
+        let animation = Motivate(
+                time: 3.0,
+                button1.byX(-20),
+                button2.byX(-20)
+            )
+            <> Motivate(
+                time: 1.0,
+                button1.byX(-30),
+                button2.byX(-30)
+            )
+            <> Motivate(
+                time: 1.0,
+                button1.byX(-50),
+                button2.byX(-50)
+            )
+            <> Motivate(
+                time: 2.5,
+                button1.byX( 0),
+                button2.byX( 0),
+                button3.byX( -100),
+                button3.byY( -50)
+            )
+        
+        
+
+        
+        
+        
+//            <> Motivate(time: 1.0,
+//                button1.byX(-100))
+//            <> Motivate(time: 2.5,
+//                button2.byX(+100))
+//            <> Motivate(time: 1.5,
+//                button3.byX(-100),
+//                button2.byX(-100),
+//                button1.byX( 100))
         
         
 //       let animation = Motivate(time: 3.0){
@@ -77,7 +97,7 @@ class ViewController: UIViewController {
 //                        self.button1.backgroundColor = UIColor.whiteColor()
 //                    }
         
-        animation.runLoop()
+        animation.forwardReverse()
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

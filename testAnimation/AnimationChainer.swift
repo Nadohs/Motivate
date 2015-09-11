@@ -17,15 +17,29 @@ typealias EmptyFunc =  Void -> Void
 
 typealias PurePair = (Double, Double) -> TimedPair
 
+typealias RussDollFunc = (EmptyFunc) -> EmptyFunc
+
 
 struct TimedPair {
     
-    let time : Double
+//    let timedClose = { x in
+//        return { y in
+//            UIView.animateWithDuration(0.0, animations: {
+//                    x()
+//                }, completion: {
+//                    y()
+//            })
+//        }
+//    }
+    
+    var time : Double
     let delay: Double
-    let block: EmptyFunc
+    
+    let block  : EmptyFunc
+    var reverse: EmptyFunc
     
     var style  : MotivationStyle = .None
-    var reverse: EmptyFunc = {}
+
     
     var target : Any?
     
@@ -33,6 +47,7 @@ struct TimedPair {
         self.time  = time
         self.delay = delay
         self.block = block
+        self.reverse = reverse
     }
     
     static var Zero:TimedPair {
@@ -75,9 +90,11 @@ private func delay(delay:Double, closure:()->()) {
 
 func Motivate(time t:Double, delay d:Double = 0.0, _ e: TimedPair...) -> TimedPairWrapper{
         
-        let total = e.reduce(TimedPair.Zero, combine: + )
-        
-        return TimedPair(t, d, total.block, reverse: total.reverse).wrap()
+        var total = e.reduce(.Zero, combine: + )
+        total.time = t
+
+        let x = TimedPair(t, d, total.block, reverse: total.reverse).wrap()
+    return x
     }
 
 
@@ -104,7 +121,7 @@ class TimedPairWrapper {
         }
     }
     
-    var reverse:TimedPair
+    var reverse:TimedPair = .Zero
     
     func calculateTime(){
         let left = self.unwrap
@@ -118,6 +135,7 @@ class TimedPairWrapper {
         let left = self.unwrap
 
         return {
+            print("def time  = \(left.time) && totalTime = \(self.totalTime) && delay = \(left.delay)")
             
             UIView.animateWithDuration(
                      left.time,
@@ -125,15 +143,37 @@ class TimedPairWrapper {
                    options: UIViewAnimationOptions.TransitionNone,
                 animations:
                 
-                    { left.block() })
-                    { _ in next()  }
+                    { left.block() }) // Animation Block
+                    { _ in next()  }  // Completion Block
+        }
+    }
+    
+    
+    
+    ///A3  - B1 - C1 - D2
+    ///totalTimeDelay - animate D2 - totalTimeDelay + D2 time - animate C1 - totalDelay + c1 time +
+    
+    func revChainAnimate(next:EmptyFunc = {} ) -> EmptyFunc{
+        
+        let left = self.unwrap
+//        var time = left.time
+//        if time == -1{
+//            time = self.totalTime - 
+//        }
+        return {
+            print("def time  = \(left.time) && totalTime = \(self.totalTime) && delay = \(left.delay)")
+            print("rev time = \(self.reverse.time)")
+            UIView.animateWithDuration(left.time, animations: left.reverse, completion: {_ in next()})
+            
+//            delay(self.totalTime){
+//                next()
+//            }
         }
     }
     
     
     init(tp:TimedPair){
         _unwrap = tp
-        reverse = tp
     }
     
     /// call `runLoop()` to repeat the animation continuously.
@@ -149,6 +189,12 @@ class TimedPairWrapper {
         unwrap.block()
     }
     
+    func forwardReverse(){
+        run()
+        delay(totalTime){
+            self.unwrap.reverse()
+        }
+    }
     
     private func loop(){
         unwrap.block()
@@ -179,8 +225,8 @@ infix operator <> {
 }
 
 
-
 /// Combine two unwrapped `TimedPair` block & reverse functions, while resetting `time` and `delay`
+
 
 private func + (lhs:TimedPair, rhs:TimedPair) -> TimedPair{
     let block = {
@@ -204,6 +250,17 @@ func <> ( lhs:TimedPairWrapper, rhs:TimedPairWrapper) ->  TimedPairWrapper{
     lhs.calculateTime()
     rhs.calculateTime()
     
+    let rev = TimedPair(rhs.unwrap.time,rhs.unwrap.time, {},reverse: {
+        
+        rhs.revChainAnimate({
+            if lhs.unwrap.time == -1.0{
+                lhs.unwrap.reverse()
+            }else{
+                lhs.revChainAnimate()()
+            }
+        })()
+    })
+    
     let pair = TimedPairWrapper(tp : TimedPair(-1.0,0.0, {
             
         lhs.chainAnimate({
@@ -214,15 +271,10 @@ func <> ( lhs:TimedPairWrapper, rhs:TimedPairWrapper) ->  TimedPairWrapper{
             }
         })()
         
-    }))
+    }, reverse: rev.reverse ))
     
     pair.totalTime = lhs.totalTime + rhs.totalTime
-    
-//    let reverse = TimedPair(0.0,0.0){
-//        
-//    }
-//    
-//    pair.reverse = reverse
+    //pair.unwrap.reverse = rev
     
     return pair
 }
