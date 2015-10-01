@@ -101,6 +101,8 @@ class TimedPairWrapper {
     
     private var totalTime:Double = 0
     
+//    private var animations:[TimedPair] = []
+    
     private var _unwrap:TimedPair
     private var  unwrap:TimedPair{
         get{
@@ -157,7 +159,11 @@ class TimedPairWrapper {
                     next()
                 }
             }else{
-                UIView.animateWithDuration(left.time, animations: left.reverse, completion: {_ in next()})
+                UIView.animateWithDuration(left.time,
+                    delay: left.delay,
+                    options: UIViewAnimationOptions.TransitionNone,
+                    animations: left.reverse,
+                    completion: {_ in next()})
             }
 
             

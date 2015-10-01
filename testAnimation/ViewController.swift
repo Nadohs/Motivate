@@ -8,6 +8,32 @@
 
 import UIKit
 
+var str = "Hello, playground"
+
+
+class SumMaker {
+    
+    var extended = false
+    var value:Int = 0
+    
+    init(_ value: Int){
+        self.value = value
+    }
+    
+    func extend(value:Int) ->SumMaker{
+        extended = true
+        return SumMaker(value + self.value)
+    }
+    
+    deinit {
+        if !extended{
+            print("final value \(value)")
+        }
+    }
+}
+
+
+
 
 class ViewController: UIViewController {
 
@@ -31,13 +57,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        func testDeinitTiming() {
+            print("function start")
+            SumMaker(5).extend(10).extend(15).extend(20)
+            print("function end")
+        }
+        
+        testDeinitTiming()
 
     }
     
 
     func animationChain(){
         
-         animation = Motivate(
+         animation =
+            Motivate(
                 time: 3.0,
                 button1.byX(-20),
                 button2.byX(-20)
