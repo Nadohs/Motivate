@@ -7,6 +7,33 @@
 //
 
 import UIKit
+import Motivate
+
+var str = "Hello, playground"
+
+
+class SumMaker {
+    
+    var extended = false
+    var value:Int = 0
+    
+    init(_ value: Int){
+        self.value = value
+    }
+    
+    func extend(value:Int) ->SumMaker{
+        extended = true
+        return SumMaker(value + self.value)
+    }
+    
+    deinit {
+        if !extended{
+            print("final value \(value)")
+        }
+    }
+}
+
+
 
 
 class ViewController: UIViewController {
@@ -17,50 +44,107 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var button3: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    var animation:TimedPairWrapper?
+    
+    @IBAction func playPressed(sender: AnyObject) {
+        animation?.run()
     }
     
+    
+    @IBAction func reversePressed(sender: AnyObject) {
+        animation?.runReverse()
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        func testDeinitTiming() {
+            print("function start")
+            SumMaker(5).extend(10).extend(15).extend(20)
+            print("function end")
+        }
+        
+        testDeinitTiming()
+
+    }
     
 
     func animationChain(){
         
-       let animation = Motivate(time: 3.0){
-                        self.button1.frame.origin.x += 100
-                        self.button2.frame.origin.x -= 100
-                        self.button1.backgroundColor = UIColor.greenColor()
-                        }
-                    <> Motivate(time: 1.0, delay:2.0){
-                        
-                        self.button1.frame.origin.x -= 100
-                        self.button2.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.blueColor()
-                    }
-                    <> Motivate(time: 2.5){
-                        
-                        self.button3.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.orangeColor()
-                    }
-                    <> Motivate(time: 1.0){
-                        
-                        self.button1.frame.origin.x -= 100
-                        self.button1.backgroundColor = UIColor.redColor()
-                    }
-                    <> Motivate(time: 2.5){
-                        
-                        self.button2.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.blackColor()
-                    }
-                    <> Motivate(time: 1.5, delay:1.5){
-                        
-                        self.button3.frame.origin.x -= 100
-                        self.button2.frame.origin.x -= 100
-                        self.button1.frame.origin.x += 100
-                        self.button1.backgroundColor = UIColor.whiteColor()
-                    }
+         animation =
+            Motivate(
+                time: 3.0,
+                button1.byX(-20),
+                button2.byX(-20)
+            )
+            <> Motivate(
+                time: 1.0,
+                button1.byX(-30),
+                button2.byX(-30)
+            )
+            <> Motivate(
+                time: 1.0,
+                button1.byX(-50),
+                button2.byX(-50)
+            )
+            <> Motivate(
+                time: 2.5,
+                button1.byX( 0),
+                button2.byX( 0),
+                button3.byX( -100),
+                button3.byY( -50)
+            )
         
-        animation.runLoop()
+        
+
+        
+        
+        
+//            <> Motivate(time: 1.0,
+//                button1.byX(-100))
+//            <> Motivate(time: 2.5,
+//                button2.byX(+100))
+//            <> Motivate(time: 1.5,
+//                button3.byX(-100),
+//                button2.byX(-100),
+//                button1.byX( 100))
+        
+        
+//       let animation = Motivate(time: 3.0){
+//                        self.button1.frame.origin.x += 100
+//                        self.button2.frame.origin.x -= 100
+//                        self.button1.backgroundColor = UIColor.greenColor()
+//                        }
+//                    <> Motivate(time: 1.0, delay:2.0){
+//                        
+//                        self.button1.frame.origin.x -= 100
+//                        self.button2.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.blueColor()
+//                    }
+//                    <> Motivate(time: 2.5){
+//                        
+//                        self.button3.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.orangeColor()
+//                    }
+//                    <> Motivate(time: 1.0){
+//                        
+//                        self.button1.frame.origin.x -= 100
+//                        self.button1.backgroundColor = UIColor.redColor()
+//                    }
+//                    <> Motivate(time: 2.5){
+//                        
+//                        self.button2.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.blackColor()
+//                    }
+//                    <> Motivate(time: 1.5, delay:1.5){
+//                        
+//                        self.button3.frame.origin.x -= 100
+//                        self.button2.frame.origin.x -= 100
+//                        self.button1.frame.origin.x += 100
+//                        self.button1.backgroundColor = UIColor.whiteColor()
+//                    }
+        
+        //animation!.forwardReverse()
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

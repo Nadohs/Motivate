@@ -21,6 +21,9 @@ into this much more readable syntax:
 
 
 ```
+func Motivate(time t:Double, delay d:Double = 0.0, e: EmptyFunc) -> TimedPairWrapper
+
+//USAGE
 func shortFormChainedSyntax(){
     Motivate(time: 1.0){
         print("1\n")
@@ -50,25 +53,30 @@ Chain  `TimedPair` animations together with the `<>` operator, which calls the n
       <> Motivate(time: 3.5) { print("3\n") }
 ```
 
-### Looping
+### Reversability
+Using a "by" quantity type specification you can now reverse stored animations with `runReverse()`.
 
-You can assign the animation as a variable, and either call `runLoop` to run it looped, or `run` to animate it once.
 
-```        
-let animation = Motivate(time: 3.0){
-                    self.button1.frame.origin.x += 100
-                    self.button2.frame.origin.x -= 100
-                    self.button1.backgroundColor = UIColor.greenColor()
-                }
-                <> Motivate(time: 2.5){
-                    self.button1.backgroundColor = UIColor.orangeColor()
-                }
-                <> Motivate(time: 1.5, delay:1.5){
-                    self.button2.frame.origin.x += 100
-                    self.button1.frame.origin.x -= 100
-                    self.button1.backgroundColor = UIColor.whiteColor()
-                }
-
-animation.runLoop() //repeats
-//animation.run() //runs once
 ```
+    func Motivate(time t:Double, delay d:Double = 0.0, _ e: TimedPair...) -> TimedPairWrapper
+    
+    ////USAGE
+    let animation =
+            Motivate(
+                time: 3.0,
+                button1.byX(-20),
+                button2.byX(-20)
+            )
+            <> Motivate(
+                time: 1.0,
+                button1.byX(-30),
+                button2.byX(-30)
+            )
+         
+    animation.runReverse()
+```
+
+
+~~### Looping~~
+
+`runLoop` and `forwardReverse()` temporarily removed in current version
