@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Motivate
 
 var str = "Hello, playground"
 

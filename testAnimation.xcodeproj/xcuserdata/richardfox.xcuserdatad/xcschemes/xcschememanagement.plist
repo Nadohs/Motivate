@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Motivate.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>testAnimation.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>BD35EDE11BBD08CD00C99CD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BD88D86A1B9936480032D0D6</key>
 		<dict>
 			<key>primary</key>
