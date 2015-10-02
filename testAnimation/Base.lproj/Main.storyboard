@@ -15,37 +15,41 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gA-JK-4TO">
-                                <rect key="frame" x="254" y="109" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vr0-e1-mMk">
-                                <rect key="frame" x="254" y="212" width="46" height="30"/>
+                                <rect key="frame" x="164" y="212" width="46" height="30"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdb-me-80W">
-                                <rect key="frame" x="106" y="534" width="36" height="30"/>
+                                <rect key="frame" x="102" y="601" width="36" height="30"/>
                                 <state key="normal" title="PLAY"/>
                                 <connections>
                                     <action selector="playPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="euQ-hB-B2g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiR-yu-NLd">
-                                <rect key="frame" x="450" y="534" width="65" height="30"/>
+                                <rect key="frame" x="229" y="601" width="65" height="30"/>
                                 <state key="normal" title="REVERSE"/>
                                 <connections>
                                     <action selector="reversePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ft6-oJ-0Jm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYU-v3-ukM">
-                                <rect key="frame" x="276" y="339" width="46" height="30"/>
+                                <rect key="frame" x="164" y="285" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dog1" translatesAutoresizingMaskIntoConstraints="NO" id="IDH-VL-OEl">
+                                <rect key="frame" x="135" y="346" width="105" height="133"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gA-JK-4TO">
+                                <rect key="frame" x="164" y="137" width="46" height="30"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -59,14 +63,20 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Wdb-me-80W" secondAttribute="bottom" constant="36" id="qfB-bG-x5J"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="button1" destination="3gA-JK-4TO" id="lAp-dZ-z1z"/>
                         <outlet property="button2" destination="vr0-e1-mMk" id="gVs-wP-MqL"/>
                         <outlet property="button3" destination="SYU-v3-ukM" id="wFE-G9-9c3"/>
+                        <outlet property="imageView1" destination="IDH-VL-OEl" id="nvO-NB-jNe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="444" y="342"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dog1" width="625" height="450"/>
+    </resources>
 </document>

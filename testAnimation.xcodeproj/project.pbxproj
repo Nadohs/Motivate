@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD0BB5E91BBE16F000CF7EEF /* ShortNumberCasting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0BB5E81BBE16F000CF7EEF /* ShortNumberCasting.swift */; settings = {ASSET_TAGS = (); }; };
 		BD35EDE51BBD08CD00C99CD1 /* Motivate.h in Headers */ = {isa = PBXBuildFile; fileRef = BD35EDE41BBD08CD00C99CD1 /* Motivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD35EDE91BBD08CE00C99CD1 /* Motivate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD35EDE21BBD08CD00C99CD1 /* Motivate.framework */; };
 		BD35EDEA1BBD08CE00C99CD1 /* Motivate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BD35EDE21BBD08CD00C99CD1 /* Motivate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BD0BB5E81BBE16F000CF7EEF /* ShortNumberCasting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortNumberCasting.swift; sourceTree = "<group>"; };
 		BD35EDE21BBD08CD00C99CD1 /* Motivate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Motivate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD35EDE41BBD08CD00C99CD1 /* Motivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Motivate.h; sourceTree = "<group>"; };
 		BD35EDE61BBD08CD00C99CD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		BD35EDE31BBD08CD00C99CD1 /* Motivate */ = {
 			isa = PBXGroup;
 			children = (
+				BD0BB5E81BBE16F000CF7EEF /* ShortNumberCasting.swift */,
 				BD35EDEF1BBD111600C99CD1 /* AnimationChainer.swift */,
 				BD35EDF21BBD111E00C99CD1 /* TimedPairExtensions.swift */,
 				BD35EDE41BBD08CD00C99CD1 /* Motivate.h */,
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD35EDF11BBD111600C99CD1 /* AnimationChainer.swift in Sources */,
+				BD0BB5E91BBE16F000CF7EEF /* ShortNumberCasting.swift in Sources */,
 				BD35EDF41BBD111E00C99CD1 /* TimedPairExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +564,7 @@
 				BD35EDED1BBD08CE00C99CD1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD88D8661B9936480032D0D6 /* Build configuration list for PBXProject "testAnimation" */ = {
 			isa = XCConfigurationList;

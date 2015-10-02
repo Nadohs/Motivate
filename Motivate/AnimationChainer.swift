@@ -105,7 +105,7 @@ public class TimedPairWrapper {
     }
     
     
-    func buildAnimation(var list:[TimedPair], reverse:Bool = false) -> EmptyFunc{
+    func buildAnimation(list:[TimedPair], reverse:Bool = false) -> EmptyFunc{
         
         var gen = list.generate()
         
