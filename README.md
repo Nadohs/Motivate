@@ -1,7 +1,7 @@
 # SwiftChainedAnimations
 Chain Animations in Swift with operators
 
-### What it Replaces
+### What Does it Replace?
 
 What **Motivate** does is turn this long chain of animations, set to fire one animation after the other completes:
 
